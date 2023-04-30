@@ -37,19 +37,27 @@ final class ViewController: UIViewController {
     // MARK: - IBActions
     @IBAction func blueSliderAction() {
         blueValueLabel.text = (String(format: "%.2f", blueSlider.value))
-        colorfulView.backgroundColor = .init(red: CGFloat(redSlider.value), green: CGFloat(greenSlider.value), blue: CGFloat(blueSlider.value), alpha: 1)
+        updateColor()
     }
     
     @IBAction func greenSliderAction() {
         greenValueLabel.text = (String(format: "%.2f", greenSlider.value))
-        colorfulView.backgroundColor = .init(red: CGFloat(redSlider.value), green: CGFloat(greenSlider.value), blue: CGFloat(blueSlider.value), alpha: 1)
+        updateColor()
     }
     
     @IBAction func redSliderAction() {
         redValueLabel.text = (String(format: "%.2f", redSlider.value))
-        colorfulView.backgroundColor = .init(red: CGFloat(redSlider.value), green: CGFloat(greenSlider.value), blue: CGFloat(blueSlider.value), alpha: 1)
+        updateColor()
     }
     // MARK: - Private Methods
+    private func updateColor() {
+        colorfulView.backgroundColor = .init(
+            red: CGFloat(redSlider.value),
+            green: CGFloat(greenSlider.value),
+            blue: CGFloat(blueSlider.value),
+            alpha: 1)
+    }
+    
     private func setupRedSlider() {
         redSlider.tintColor = .red
         redSlider.thumbTintColor = .lightGray
@@ -66,7 +74,7 @@ final class ViewController: UIViewController {
         greenSlider.value = 0
     }
     
-    fileprivate func setuoBlueSlider() {
+    private func setuoBlueSlider() {
         blueSlider.tintColor = .blue
         blueSlider.thumbTintColor = .lightGray
         blueSlider.minimumValue = 0
