@@ -12,11 +12,10 @@ protocol ViewControllerDelegate: AnyObject {
 }
 
 final class MainViewController: UIViewController {
-
-    var redValue: Float = 0
-    var greenValue: Float = 1
-    var blueValue: Float = 1
     
+    var redValue: Float = 0
+    var greenValue: Float = 0
+    var blueValue: Float = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,8 +26,7 @@ final class MainViewController: UIViewController {
             blue: CGFloat(blueValue),
             alpha: 1
         )
-
-        }
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let mainVC = segue.destination as? ViewController else { return }
@@ -37,14 +35,19 @@ final class MainViewController: UIViewController {
         mainVC.blueFirstValue = blueValue
         mainVC.delegate = self
     }
-
 }
-// MARK: - SettingsViewControllerDelegate
+// MARK: - ViewControllerDelegate
 extension MainViewController: ViewControllerDelegate {
     func setNewValues(for newRedValue: Float, and newGreenValue: Float, and newBlueValue: Float) {
         redValue = newRedValue
         greenValue = newGreenValue
         blueValue = newBlueValue
+        
+        view.backgroundColor = UIColor(
+            red: CGFloat(redValue),
+            green: CGFloat(greenValue),
+            blue: CGFloat(blueValue),
+            alpha: 1
+        )
     }
-    
 }

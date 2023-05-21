@@ -58,8 +58,8 @@ final class ViewController: UIViewController {
     
     @IBAction func saveValuesPressed(_ sender: UIButton) {
         delegate.setNewValues(for: redSlider.value, and: greenSlider.value, and: blueSlider.value)
-            
-            dismiss(animated: true)
+        
+        dismiss(animated: true)
     }
     
     // MARK: - Private Methods
