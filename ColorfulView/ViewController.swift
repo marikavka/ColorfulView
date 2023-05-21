@@ -20,10 +20,21 @@ final class ViewController: UIViewController {
     @IBOutlet var greenValueLabel: UILabel!
     @IBOutlet var blueValueLabel: UILabel!
     
+    var redFirstValue: Float!
+    var greenFirstValue: Float!
+    var blueFirstValue: Float!
+    
+    unowned var delegate: ViewControllerDelegate!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         colorfulView.layer.cornerRadius = 20
+        
+        redSlider.value = redFirstValue
+        greenSlider.value = greenFirstValue
+        blueSlider.value = blueFirstValue
+        
         updateColor()
         
         redValueLabel.text = string(from: redSlider)
@@ -44,7 +55,13 @@ final class ViewController: UIViewController {
             blueValueLabel.text = string(from: blueSlider)
         }
     }
-        
+    
+    @IBAction func saveValuesPressed(_ sender: UIButton) {
+        delegate.setNewValues(for: redSlider.value, and: greenSlider.value, and: blueSlider.value)
+            
+            dismiss(animated: true)
+    }
+    
     // MARK: - Private Methods
     private func updateColor() {
         colorfulView.backgroundColor = UIColor(
