@@ -24,63 +24,38 @@ final class ViewController: UIViewController {
         super.viewDidLoad()
         
         colorfulView.layer.cornerRadius = 20
+        updateColor()
         
-        setupRedSlider()
-        setupGreenSlider()
-        setuoBlueSlider()
-        
-        redValueLabel.text = redSlider.value.formatted()
-        greenValueLabel.text = greenSlider.value.formatted()
-        blueValueLabel.text = blueSlider.value.formatted()
+        redValueLabel.text = string(from: redSlider)
+        greenValueLabel.text = string(from: greenSlider)
+        blueValueLabel.text = string(from: blueSlider)
     }
     
     // MARK: - IBActions
-    @IBAction func blueSliderAction() {
-        blueValueLabel.text = (String(format: "%.2f", blueSlider.value))
+    @IBAction func sliderAction(_ sender: UISlider) {
         updateColor()
+        
+        switch sender {
+        case redSlider:
+            redValueLabel.text = string(from: redSlider)
+        case greenSlider:
+            greenValueLabel.text = string(from: greenSlider)
+        default:
+            blueValueLabel.text = string(from: blueSlider)
+        }
     }
-    
-    @IBAction func greenSliderAction() {
-        greenValueLabel.text = (String(format: "%.2f", greenSlider.value))
-        updateColor()
-    }
-    
-    @IBAction func redSliderAction() {
-        redValueLabel.text = (String(format: "%.2f", redSlider.value))
-        updateColor()
-    }
+        
     // MARK: - Private Methods
     private func updateColor() {
-        colorfulView.backgroundColor = .init(
+        colorfulView.backgroundColor = UIColor(
             red: CGFloat(redSlider.value),
             green: CGFloat(greenSlider.value),
             blue: CGFloat(blueSlider.value),
-            alpha: 1)
+            alpha: 1
+        )
     }
     
-    private func setupRedSlider() {
-        redSlider.tintColor = .red
-        redSlider.thumbTintColor = .lightGray
-        redSlider.minimumValue = 0
-        redSlider.maximumValue = 1
-        redSlider.value = 0
+    private func string(from slider: UISlider) -> String {
+        String(format: "%.2f", slider.value)
     }
-    
-    private func setupGreenSlider() {
-        greenSlider.tintColor = .green
-        greenSlider.thumbTintColor = .lightGray
-        greenSlider.minimumValue = 0
-        greenSlider.maximumValue = 1
-        greenSlider.value = 0
-    }
-    
-    private func setuoBlueSlider() {
-        blueSlider.tintColor = .blue
-        blueSlider.thumbTintColor = .lightGray
-        blueSlider.minimumValue = 0
-        blueSlider.maximumValue = 1
-        blueSlider.value = 0
-    }
-    
 }
-
